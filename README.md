@@ -1,2 +1,0 @@
-# picsum
-Created with CodeSandbox
