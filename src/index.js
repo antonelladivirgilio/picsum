@@ -8,6 +8,8 @@ import "./styles.css";
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardMedia, CardContent, CardActions, Button, Typography, Hidden, CircularProgress } from '@material-ui/core';
 
+// Utils
+import { getRandomInt } from './utils/index';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -16,7 +18,7 @@ function App() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setImageId(Math.floor(Math.random() * (1000 + 1)));
+      setImageId(getRandomInt(1, 100));
     }, 5000);
     return () => clearInterval(timer);
   }, []);
@@ -42,7 +44,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Lorem Picsum</h1>
+      <Typography variant="h3" component="h1" gutterBottom>
+        Lorem Picsum
+      </Typography>
       {
         loading ? <CircularProgress /> :
           <Card className={classes.card}>
@@ -52,31 +56,12 @@ function App() {
               image={`https://picsum.photos/id/${imageId}/1024/768`}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
+              <Typography gutterBottom variant="h5" component="h2" paragraph>
                 {imageAuthor}
               </Typography>
             </CardContent>
           </Card>
       }
-
-      <style>{`
-        .image-container {
-          background-image: url('https://picsum.photos/id/${imageId}/1024/768');         
-          width: 100%;
-          min-height: 400px;
-          background-size: cover;
-          background-position: 50%;
-          display: flex;
-          align-items: flex-end;
-        }
-
-        .image-author {
-          margin: 0;
-          padding: 10px;
-          background-color: #000;
-          color: #fff;
-        }
-      `}</style>
     </div>
   );
 }
